@@ -1,0 +1,20 @@
+{
+  "name": "EdgeViz",
+  "keywords": "",
+  "description": "Console Visualization library for Arduino",
+  "repository":
+  {
+      "type": "git",
+      "url": "https://github.com/sgrsn/EdgeViz.git"
+  },
+  "authors":
+  {
+      "name": "Hidaka Sato",
+      "url": "https://github.com/sgrsn",
+      "maintainer": true
+  },
+  "version": "0.0.0",
+  "license": "MIT",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
