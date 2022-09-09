@@ -45,7 +45,7 @@ class ConsoleViz
   void circle(const std::vector<int16_t>& center, uint8_t radius, const char* color, const uint16_t& thickness=1);
   void fill(const std::vector<std::vector<int16_t>>& points, char* color);
   void clear();
-  void imshow();
+  void imshow(bool flip_y=false);
 
  private:
   std::vector<std::vector<std::pair<int16_t, char*>>> rows_;

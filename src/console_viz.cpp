@@ -157,8 +157,9 @@ void ConsoleViz::clear()
   rows_.resize(n_rows_);
 }
 
-void ConsoleViz::imshow()
+void ConsoleViz::imshow(bool flip_y)
 {
+  if(flip_y) std::reverse(rows_.begin(), rows_.end());
   std::stringstream ss;
   ss.str("");
   ss << GREEN;
