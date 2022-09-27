@@ -21,6 +21,7 @@
 
 #include <vector>
 #include <string>
+#include <ArduinoEigen.h>
 
 namespace EdgeViz
 {
@@ -43,6 +44,9 @@ class ConsoleViz
   void rectangle(const std::vector<int16_t>& p1, const std::vector<int16_t>& p2, const char* color, const uint16_t& thickness=1);
   void rectangle(const std::vector<int16_t>& p1, const std::vector<int16_t>& p2, float angle, const char* color, const uint16_t& thickness=1);
   void circle(const std::vector<int16_t>& center, uint8_t radius, const char* color, const uint16_t& thickness=1);
+
+  void box(const std::vector<int16_t>& p, const std::vector<int16_t>& size, Eigen::Matrix3d rot, const char* color, const uint16_t& thickness=1);
+
   void fill(const std::vector<std::vector<int16_t>>& points, char* color);
   void clear();
   void imshow(bool flip_y=false);

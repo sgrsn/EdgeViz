@@ -128,6 +128,36 @@ void ConsoleViz::circle(const std::vector<int16_t>& center, uint8_t radius, cons
   fill(fill_points, color);
 }
 
+
+void ConsoleViz::box(const std::vector<int16_t>& p, const std::vector<int16_t>& size, Eigen::Matrix3d rot, const char* color, const uint16_t& thickness=1)
+{
+  Eigen::Matrix<double, 3, 8> points_vectors;
+  points_vectors << p[0], p[0]+size[0], p[0]+size[0], p[0],         p[0],         p[0]+size[0], p[0]+size[0], p[0], 
+                    p[1], p[1]        , p[1]+size[1], p[1]+size[1], p[1],         p[1]        , p[1]+size[1], p[1]+size[1], 
+                    p[2], p[2]        , p[2]        , p[2]        , p[2]+size[2], p[2]+size[2], p[2]+size[2], p[2]+size[2];
+  Eigen::Matrix<double, 3, 8> trans_vectors;
+  trans_vectors << p[0], p[0], p[0], p[0], p[0], p[0], p[0], p[0], 
+                   p[1], p[1], p[1], p[1], p[1], p[1], p[1], p[1], 
+                   p[2], p[2], p[2], p[2], p[2], p[2], p[2], p[2];
+  Eigen::Matrix<double, 3, 8> rotated_points_vectors;
+  rotated_points_vectors = rot * (points_vectors - trans_vectors) + trans_vectors;
+  std::vector<std::vector<int16_t>> pts;
+  for (int i = 0; i < 8; i++)
+    pts.emplace_back(std::vector<int16_t>{(int16_t)rotated_points_vectors(0, i), (int16_t)rotated_points_vectors(1, i)});
+  line(pts[0], pts[1], color, thickness);
+  line(pts[1], pts[2], color, thickness);
+  line(pts[2], pts[3], color, thickness);
+  line(pts[3], pts[0], color, thickness);
+  line(pts[4], pts[5], color, thickness);
+  line(pts[5], pts[6], color, thickness);
+  line(pts[6], pts[7], color, thickness);
+  line(pts[7], pts[4], color, thickness);
+  line(pts[0], pts[4], color, thickness);
+  line(pts[1], pts[5], color, thickness);
+  line(pts[2], pts[6], color, thickness);
+  line(pts[3], pts[7], color, thickness);
+}
+
 // 座標と色を渡すと塗る関数
 void ConsoleViz::fill(const std::vector<std::vector<int16_t>>& points, char* color)
 {
